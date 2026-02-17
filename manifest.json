@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "description": "Batch checks domain availability for base labels across .com/.ai (or custom TLDs) using GoDaddy API.",
   "author": {
-    "name": "cf-domain-mcp"
+    "name": "0xbmart"
   },
   "server": {
     "type": "uv",

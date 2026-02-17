@@ -1,4 +1,4 @@
-# cf-domain-mcp
+# GoDaddy Domain Availability MCP
 
 MCP server (FastMCP) packaged for MCP Bundles (`.mcpb`) that batch-checks domain availability using GoDaddy's API.
 
