@@ -1,0 +1,84 @@
+{
+  "manifest_version": "0.4",
+  "name": "cf-domain-mcp",
+  "display_name": "GoDaddy Domain Availability",
+  "version": "0.1.0",
+  "description": "Batch checks domain availability for base labels across .com/.ai (or custom TLDs) using GoDaddy API.",
+  "author": {
+    "name": "cf-domain-mcp"
+  },
+  "server": {
+    "type": "uv",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "${__dirname}/server/main.py"
+      ],
+      "env": {
+        "GD_API_KEY": "${user_config.gd_api_key}",
+        "GD_API_SECRET": "${user_config.gd_api_secret}",
+        "GD_ENVIRONMENT": "${user_config.gd_environment}",
+        "MAX_BATCH_LABELS": "${user_config.max_batch_labels}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "check_domain_availability_batch",
+      "description": "Checks domain availability for a list of base labels over .com/.ai by default, with optional custom TLDs."
+    }
+  ],
+  "tools_generated": false,
+  "keywords": [
+    "domain",
+    "godaddy",
+    "availability",
+    "mcp"
+  ],
+  "license": "MIT",
+  "privacy_policies": [
+    "https://www.godaddy.com/legal/agreements/privacy-policy"
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "user_config": {
+    "gd_api_key": {
+      "type": "string",
+      "title": "GoDaddy API Key",
+      "description": "GoDaddy API key for Domains API requests.",
+      "required": true
+    },
+    "gd_api_secret": {
+      "type": "string",
+      "title": "GoDaddy API Secret",
+      "description": "GoDaddy API secret for Domains API requests.",
+      "sensitive": true,
+      "required": true
+    },
+    "gd_environment": {
+      "type": "string",
+      "title": "GoDaddy Environment",
+      "description": "GoDaddy API environment: ote or production.",
+      "default": "ote",
+      "required": true
+    },
+    "max_batch_labels": {
+      "type": "number",
+      "title": "Max labels per request",
+      "description": "Safety limit for number of labels in one tool call.",
+      "default": 100,
+      "min": 1,
+      "max": 500
+    }
+  }
+}
